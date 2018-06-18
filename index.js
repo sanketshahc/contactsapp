@@ -11,23 +11,28 @@ app.set('view engine', '.hbs');
 app.get('/', (req,res)=>{
     // res.send('Hay');
     res.render('home', {
+        layout: "homepage",
         message: "hellow handlebars"
     })
 })
 
 // Contacts List page: show the user all contacts
 app.get('/contacts', (req,res)=>{
-    res.send(contacts.users);
+    res.render('contact-list', {
+        contactsArray: contacts.users
+    });
 })
 
 // contacts deatils 
 app.get('/contacts/:id',(req,res)=>{
-    // res.send(`you are viewing deets for ${req.params.id}`);
     let id = req.params.id;
     let contact = contacts.users.find((user) => {
         return user.id === id;
     })
-    res.send(contact)
+    res.render('contact-details', {
+        contact: contact
+    })
+    // change to res.render
 })
 
 
