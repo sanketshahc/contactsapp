@@ -2,12 +2,12 @@ const express = require('express');
 const app = express();
 const contacts = require('./contacts');
 const expressHbs = require('express-handlebars');
-
+const static = express.static;
 // what does this do??
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
 app.set('view engine', '.hbs');
-
-
+app.use(static('public'));
+    
 app.get('/', (req,res)=>{
     // res.send('Hay');
     res.render('home', {
@@ -32,7 +32,6 @@ app.get('/contacts/:id',(req,res)=>{
     res.render('contact-details', {
         contact: contact
     })
-    // change to res.render
 })
 
 
